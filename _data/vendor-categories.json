@@ -1,0 +1,13 @@
+[
+  { "slug": "hvac",       "label": "HVAC",               "icon": "hvac" },
+  { "slug": "plumbing",   "label": "Plumbing",            "icon": "plumbing" },
+  { "slug": "electrical", "label": "Electrical",          "icon": "electrical" },
+  { "slug": "pest",       "label": "Pest Control",        "icon": "pest" },
+  { "slug": "lawn",       "label": "Lawn & Landscape",    "icon": "lawn" },
+  { "slug": "roofing",    "label": "Roofing",             "icon": "roofing" },
+  { "slug": "handyman",   "label": "Handyman",            "icon": "contractor" },
+  { "slug": "pool",       "label": "Pool",                "icon": "pool" },
+  { "slug": "painting",   "label": "Painting",            "icon": "painting" },
+  { "slug": "cleaning",   "label": "Cleaning",            "icon": "cleaning" },
+  { "slug": "other",      "label": "Other",               "icon": "other" }
+]

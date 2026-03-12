@@ -133,12 +133,12 @@ collections:
           - { label: "Plumbing", value: "plumbing" }
           - { label: "Electrical", value: "electrical" }
           - { label: "Pest Control", value: "pest" }
-          - { label: "Lawn & Landscaping", value: "lawn" }
-          - { label: "General Contractor", value: "contractor" }
+          - { label: "Lawn & Landscape", value: "lawn" }
           - { label: "Roofing", value: "roofing" }
+          - { label: "Handyman", value: "handyman" }
+          - { label: "Pool", value: "pool" }
           - { label: "Painting", value: "painting" }
           - { label: "Cleaning", value: "cleaning" }
-          - { label: "Pool", value: "pool" }
           - { label: "Other", value: "other" }
       - { label: "Phone", name: "phone", widget: "string", required: false }
       - { label: "Website", name: "website", widget: "string", required: false, hint: "Full URL, e.g. https://example.com" }
@@ -192,3 +192,37 @@ collections:
       - { label: "Days on Market", name: "dom", widget: "string", required: false, hint: "e.g. 5 days on market" }
       - { label: "Short Description", name: "description", widget: "text", required: false, hint: "Optional 1–2 sentence highlight for the board to feature this listing." }
       - { label: "Active", name: "active", widget: "boolean", default: true, hint: "Uncheck to hide from the website." }
+
+  # ── Vendor Categories ─────────────────────────────────────────────────
+  - name: "vendor-categories"
+    label: "Vendor Categories"
+    files:
+      - name: "categories"
+        label: "Vendor Category List"
+        file: "_data/vendor-categories.json"
+        description: "Add, remove, or reorder vendor categories. Each category you add here will automatically appear as a filter bubble on the Vendor Directory page."
+        fields:
+          - label: "Categories"
+            name: "root"
+            widget: "list"
+            summary: "{{fields.label}} ({{fields.slug}})"
+            fields:
+              - { label: "Slug (URL-safe ID, no spaces)", name: "slug", widget: "string", hint: "Lowercase, no spaces. e.g. 'fencing' or 'tree-service'. Must match the category value used on vendor entries." }
+              - { label: "Display Label", name: "label", widget: "string", hint: "What visitors see. e.g. 'Fencing' or 'Tree Service'." }
+              - label: "Icon"
+                name: "icon"
+                widget: "select"
+                default: "other"
+                hint: "Choose the closest matching icon."
+                options:
+                  - { label: "HVAC / Air", value: "hvac" }
+                  - { label: "Plumbing", value: "plumbing" }
+                  - { label: "Electrical", value: "electrical" }
+                  - { label: "Pest / Shield", value: "pest" }
+                  - { label: "Lawn / House", value: "lawn" }
+                  - { label: "Roofing", value: "roofing" }
+                  - { label: "Contractor / Briefcase", value: "contractor" }
+                  - { label: "Pool / Waves", value: "pool" }
+                  - { label: "Painting", value: "painting" }
+                  - { label: "Cleaning / Home", value: "cleaning" }
+                  - { label: "Other / Info", value: "other" }

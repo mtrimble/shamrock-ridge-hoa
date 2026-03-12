@@ -189,7 +189,9 @@
           <span class="section-eyebrow">Send a Message</span>
           <h2 class="section-title" style="margin-bottom:var(--space-6)">Contact the HOA</h2>
 
-          <form id="contact-form" novalidate style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-sm)">
+          <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-sm)">
+            <input type="hidden" name="form-name" value="contact">
+            <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
             <div class="form-group">
               <label class="form-label" for="contact-name">Full Name <span style="color:var(--color-error)" aria-hidden="true">*</span></label>
               <input class="form-input" type="text" id="contact-name" name="name" required autocomplete="name" placeholder="Jane Smith">
@@ -377,9 +379,26 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 // Contact form
 document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  // Show success message (replace with actual form submission logic)
-  document.getElementById('form-success').style.display = 'block';
-  this.reset();
+  const form = this;
+  const btn = form.querySelector('button[type="submit"]');
+  const successEl = document.getElementById('form-success');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(form)).toString()
+  })
+  .then(() => {
+    successEl.style.display = 'block';
+    form.reset();
+    btn.style.display = 'none';
+  })
+  .catch(() => {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message';
+    alert('There was an error sending your message. Please try again.');
+  });
 });
 </script>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>

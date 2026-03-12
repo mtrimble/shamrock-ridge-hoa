@@ -138,6 +138,7 @@ collections:
           - { label: "Roofing", value: "roofing" }
           - { label: "Painting", value: "painting" }
           - { label: "Cleaning", value: "cleaning" }
+          - { label: "Pool", value: "pool" }
           - { label: "Other", value: "other" }
       - { label: "Phone", name: "phone", widget: "string", required: false }
       - { label: "Website", name: "website", widget: "string", required: false, hint: "Full URL, e.g. https://example.com" }

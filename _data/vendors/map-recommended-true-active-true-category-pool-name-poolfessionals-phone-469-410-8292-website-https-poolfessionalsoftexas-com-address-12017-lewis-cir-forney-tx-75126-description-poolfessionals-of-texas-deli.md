@@ -1,5 +1,5 @@
 ---
-name: Poolfessionals
+name: Poolfessionals Of Texas
 category: pool
 phone: 469-410-8292
 website: https://poolfessionalsoftexas.com/

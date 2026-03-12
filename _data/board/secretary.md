@@ -1,0 +1,7 @@
+---
+name: "[Secretary Name]"
+role: "Secretary"
+email: ""
+term: ""
+order: 4
+---

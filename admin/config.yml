@@ -19,6 +19,8 @@ collections:
     label_singular: "Announcement"
     folder: "_data/announcements"
     create: true
+    extension: "md"
+    format: "frontmatter"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     summary: "{{title}} ({{date}})"
     sortable_fields: ["date", "title"]
@@ -44,6 +46,8 @@ collections:
     label_singular: "Event"
     folder: "_data/events"
     create: true
+    extension: "md"
+    format: "frontmatter"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     summary: "{{title}} — {{event_date}}"
     sortable_fields: ["event_date", "title"]
@@ -60,6 +64,8 @@ collections:
     label_singular: "Board Member"
     folder: "_data/board"
     create: true
+    extension: "md"
+    format: "frontmatter"
     slug: "{{slug}}"
     summary: "{{name}} — {{role}}"
     fields:

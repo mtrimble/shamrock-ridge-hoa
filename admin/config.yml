@@ -172,3 +172,23 @@ collections:
       - { label: "External URL (alternative to upload)", name: "external_url", widget: "string", required: false, hint: "Use this if the document is hosted elsewhere." }
       - { label: "Date / Version", name: "date", widget: "string", required: false, hint: "e.g. Amended 2023 or January 2026" }
       - { label: "Sort Order", name: "order", widget: "number", value_type: "int", default: 99 }
+
+  # ── Pinned Listings (Real Estate) ─────────────────────────────────────
+  - name: "listings"
+    label: "Pinned Listings"
+    label_singular: "Pinned Listing"
+    folder: "_data/listings"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{address}} — {{price}}"
+    fields:
+      - { label: "Street Address", name: "address", widget: "string", hint: "e.g. 1234 Shamrock Ln" }
+      - { label: "List Price", name: "price", widget: "string", hint: "e.g. $349,000" }
+      - { label: "Bedrooms", name: "beds", widget: "number", value_type: "int", required: false }
+      - { label: "Bathrooms", name: "baths", widget: "string", required: false, hint: "e.g. 2 or 2.5" }
+      - { label: "Square Feet", name: "sqft", widget: "string", required: false, hint: "e.g. 2,150" }
+      - { label: "Listing URL", name: "url", widget: "string", hint: "Full link to Zillow, Redfin, or Realtor.com listing" }
+      - { label: "Primary Photo URL", name: "photo", widget: "string", required: false, hint: "Direct image URL from the listing site" }
+      - { label: "Days on Market", name: "dom", widget: "string", required: false, hint: "e.g. 5 days on market" }
+      - { label: "Short Description", name: "description", widget: "text", required: false, hint: "Optional 1–2 sentence highlight for the board to feature this listing." }
+      - { label: "Active", name: "active", widget: "boolean", default: true, hint: "Uncheck to hide from the website." }

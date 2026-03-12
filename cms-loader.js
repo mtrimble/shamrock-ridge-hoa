@@ -387,6 +387,53 @@ const CMS = {
     }
   },
 
+  // ── Real Estate / Pinned Listings ─────────────────────────────────────────
+
+  async loadRealEstatePage() {
+    const grid = document.getElementById('pinned-listings-grid');
+    if (!grid) return;
+
+    const listings = await this.fetchCollection('listings');
+
+    // Filter to active only
+    const active = (listings || []).filter(l => l.active !== false);
+
+    if (!active.length) {
+      // Show empty state
+      grid.innerHTML = `
+        <div class="pinned-empty">
+          <p>No listings currently pinned by the board.</p>
+          <p>Check Zillow, Redfin, or Realtor.com using the links above to see all homes for sale.</p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = active.map(l => {
+      const photo = l.photo
+        ? `<div class="pinned-photo" style="background-image:url('${this.escHtml(l.photo)}')"></div>`
+        : `<div class="pinned-photo pinned-photo-placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>`;
+
+      return `
+        <a class="pinned-card" href="${this.escHtml(l.url || '#')}" target="_blank" rel="noopener noreferrer">
+          ${photo}
+          <div class="pinned-card-body">
+            <p class="pinned-price">${this.escHtml(l.price || '')}</p>
+            <p class="pinned-address">${this.escHtml(l.address || '')}</p>
+            <div class="pinned-stats">
+              ${l.beds  ? `<span>${this.escHtml(String(l.beds))} bd</span>` : ''}
+              ${l.baths ? `<span>${this.escHtml(String(l.baths))} ba</span>` : ''}
+              ${l.sqft  ? `<span>${this.escHtml(l.sqft)} sqft</span>` : ''}
+              ${l.dom   ? `<span>${this.escHtml(l.dom)}</span>` : ''}
+            </div>
+            ${l.description ? `<p class="pinned-desc">${this.escHtml(l.description)}</p>` : ''}
+            <span class="pinned-cta">View Listing &rarr;</span>
+          </div>
+        </a>
+      `;
+    }).join('');
+  },
+
 };
 
 // Auto-detect which page we're on and load appropriate data
@@ -400,5 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
     CMS.loadContactPage();
   } else if (path.includes('vendors')) {
     CMS.loadVendorsPage();
+  } else if (path.includes('realestate')) {
+    CMS.loadRealEstatePage();
   }
 });

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created by RedWolf
+-->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Estate & Home Values — Shamrock Ridge HOA</title>
+<meta name="description" content="Home value trends, market stats, and current listings for Shamrock Ridge in Forney, Texas. See how your neighborhood has grown over the last decade.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <a href="./index.html" class="site-logo" aria-label="Shamrock Ridge HOA Home">
+        <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="20" fill="var(--color-primary)"/>
+          <ellipse cx="20" cy="14" rx="5" ry="6.5" fill="rgba(255,255,255,0.9)"/>
+          <ellipse cx="14.5" cy="20.5" rx="6.5" ry="5" fill="rgba(255,255,255,0.9)"/>
+          <ellipse cx="25.5" cy="20.5" rx="6.5" ry="5" fill="rgba(255,255,255,0.9)"/>
+          <rect x="19" y="24" width="2" height="8" rx="1" fill="rgba(255,255,255,0.9)"/>
+          <circle cx="20" cy="19.5" r="3" fill="var(--color-primary)"/>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-title">Shamrock Ridge</span>
+          <span class="logo-sub">Homeowners Association</span>
+        </span>
+      </a>
+      <nav class="site-nav" id="site-nav" role="navigation" aria-label="Main navigation">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./documents.html" class="nav-link">Documents</a>
+        <a href="./news.html" class="nav-link">News &amp; Events</a>
+        <a href="./resources.html" class="nav-link">Resources</a>
+        <a href="./vendors.html" class="nav-link">Vendors</a>
+        <a href="./realestate.html" class="nav-link active" aria-current="page">Real Estate</a>
+        <a href="./contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="./index.html">Home</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        <span aria-current="page">Real Estate</span>
+      </nav>
+      <p class="page-hero-eyebrow">Property Values &amp; Market Data</p>
+      <h1 class="page-hero-title">Real Estate in Shamrock Ridge</h1>
+      <p class="page-hero-desc">Track your home's value, see current listings, and understand where the Shamrock Ridge market stands today — all in one place.</p>
+    </div>
+  </section>
+
+  <!-- ── Value Stats Bar ── -->
+  <section class="stats-bar" aria-label="Home value highlights">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number">$311K</span>
+          <span class="stat-label">Median Home Value</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">+68%</span>
+          <span class="stat-label">Appreciation Since 2015</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">$126K</span>
+          <span class="stat-label">Avg. Equity Gained Since 2015</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">$154/sqft</span>
+          <span class="stat-label">Median Price Per Sq. Ft.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Home Value Chart ── -->
+  <section class="section" aria-labelledby="chart-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Zillow Home Value Index · ZIP 75126</span>
+        <h2 class="section-title" id="chart-heading">Home Value Trajectory</h2>
+        <p class="section-desc">Median home values for the 75126 ZIP code (Forney) from 2015 to today, based on Zillow's Home Value Index — smoothed monthly data from over 300 transactions per period.</p>
+      </div>
+
+      <div style="position:relative; background:var(--color-surface); border:1px solid var(--color-border); border-radius:16px; padding:var(--space-6) var(--space-6) var(--space-4); box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+
+        <!-- Milestone callouts -->
+        <div style="display:flex; gap:var(--space-4); flex-wrap:wrap; margin-bottom:var(--space-6);">
+          <div style="flex:1; min-width:140px; background:color-mix(in oklab,var(--color-primary) 8%,transparent); border-radius:10px; padding:var(--space-3) var(--space-4); border-left:3px solid var(--color-primary);">
+            <p style="font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--color-primary); margin-bottom:2px;">Jan 2015</p>
+            <p style="font-size:var(--text-xl); font-weight:700; font-family:var(--font-display); color:var(--color-text);">$184,532</p>
+            <p style="font-size:var(--text-xs); color:var(--color-text-muted);">Median value</p>
+          </div>
+          <div style="flex:1; min-width:140px; background:color-mix(in oklab,var(--color-accent) 8%,transparent); border-radius:10px; padding:var(--space-3) var(--space-4); border-left:3px solid var(--color-accent);">
+            <p style="font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--color-accent); margin-bottom:2px;">Jan 2020</p>
+            <p style="font-size:var(--text-xl); font-weight:700; font-family:var(--font-display); color:var(--color-text);">$249,215</p>
+            <p style="font-size:var(--text-xs); color:var(--color-text-muted);">Pre-pandemic baseline</p>
+          </div>
+          <div style="flex:1; min-width:140px; background:color-mix(in oklab,var(--color-success) 10%,transparent); border-radius:10px; padding:var(--space-3) var(--space-4); border-left:3px solid var(--color-success);">
+            <p style="font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--color-success); margin-bottom:2px;">Today</p>
+            <p style="font-size:var(--text-xl); font-weight:700; font-family:var(--font-display); color:var(--color-text);">$310,727</p>
+            <p style="font-size:var(--text-xs); color:var(--color-text-muted);">+68.4% since 2015</p>
+          </div>
+        </div>
+
+        <div style="position:relative; height:320px;">
+          <canvas id="valueChart" aria-label="Home value trend chart for ZIP 75126" role="img"></canvas>
+        </div>
+        <p style="font-size:var(--text-xs); color:var(--color-text-faint); text-align:right; margin-top:var(--space-3);">
+          Source: <a href="https://www.zillow.com/research/data/" target="_blank" rel="noopener" style="color:inherit;">Zillow Research — ZHVI Single-Family Homes, ZIP 75126</a> &nbsp;·&nbsp; Updated Jan 2026
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Market Snapshot ── -->
+  <section class="section section-alt" aria-labelledby="market-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Forney / 75126 · January 2026</span>
+        <h2 class="section-title" id="market-heading">Current Market Snapshot</h2>
+        <p class="section-desc">Key metrics for the 75126 market today. Data sourced from Redfin, Zillow, and local MLS records.</p>
+      </div>
+
+      <div class="resource-grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+
+        <div class="resource-card" style="text-align:center;">
+          <div class="resource-card-header" style="justify-content:center; padding-bottom:var(--space-3);">
+            <div style="width:48px;height:48px;border-radius:12px;background:color-mix(in oklab,var(--color-primary) 12%,transparent);color:var(--color-primary);display:flex;align-items:center;justify-content:center;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+          </div>
+          <p style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;color:var(--color-text);line-height:1.1;">$325K</p>
+          <p style="font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-top:4px;">Median Sale Price</p>
+          <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Down 5.5% year-over-year</p>
+        </div>
+
+        <div class="resource-card" style="text-align:center;">
+          <div class="resource-card-header" style="justify-content:center; padding-bottom:var(--space-3);">
+            <div style="width:48px;height:48px;border-radius:12px;background:color-mix(in oklab,var(--color-accent) 12%,transparent);color:var(--color-accent);display:flex;align-items:center;justify-content:center;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+          </div>
+          <p style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;color:var(--color-text);line-height:1.1;">102 days</p>
+          <p style="font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-top:4px;">Median Days on Market</p>
+          <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Up from 88 days last year</p>
+        </div>
+
+        <div class="resource-card" style="text-align:center;">
+          <div class="resource-card-header" style="justify-content:center; padding-bottom:var(--space-3);">
+            <div style="width:48px;height:48px;border-radius:12px;background:color-mix(in oklab,var(--color-success) 12%,transparent);color:var(--color-success);display:flex;align-items:center;justify-content:center;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+          </div>
+          <p style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;color:var(--color-text);line-height:1.1;">97.8%</p>
+          <p style="font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-top:4px;">Sale-to-List Ratio</p>
+          <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Homes sell ~2% below list price</p>
+        </div>
+
+        <div class="resource-card" style="text-align:center;">
+          <div class="resource-card-header" style="justify-content:center; padding-bottom:var(--space-3);">
+            <div style="width:48px;height:48px;border-radius:12px;background:color-mix(in oklab,var(--color-primary) 12%,transparent);color:var(--color-primary);display:flex;align-items:center;justify-content:center;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+          </div>
+          <p style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;color:var(--color-text);line-height:1.1;">~1,550</p>
+          <p style="font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-top:4px;">Active Listings (75126)</p>
+          <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Up 8.9% from last year</p>
+        </div>
+
+      </div>
+
+      <div class="callout info" style="margin-top:var(--space-6);">
+        <svg class="callout-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div class="callout-body">
+          <p class="callout-title">What this means for Shamrock Ridge homeowners</p>
+          <p class="callout-text">While the broader 75126 market has softened slightly from its 2022–2023 peak, median values remain <strong>68% higher than a decade ago</strong>. The current buyer's market — more inventory, longer days on market — historically precedes a stabilization period. Shamrock Ridge's established neighborhood character and proximity to Forney's growth corridor continue to support strong long-term value.</p>
+        </div>
+      </div>
+
+      <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-4);text-align:right;">Sources: <a href="https://www.redfin.com/zipcode/75126/housing-market" target="_blank" rel="noopener" style="color:inherit;">Redfin</a>, <a href="https://www.zillow.com/home-values/90711/forney-tx-75126/" target="_blank" rel="noopener" style="color:inherit;">Zillow</a>, <a href="https://www.inforney.com/local-news/forney-housing-market-shows-signs-of-stability-amid-4-price-decline/article_ad099b66-cac8-4ee8-957b-a496a99d1e18.html" target="_blank" rel="noopener" style="color:inherit;">inForney.com</a> · Data as of January–February 2026</p>
+    </div>
+  </section>
+
+  <!-- ── Homes for Sale ── -->
+  <section class="section" aria-labelledby="listings-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Browse Current Listings</span>
+        <h2 class="section-title" id="listings-heading">Homes For Sale in Shamrock Ridge</h2>
+        <p class="section-desc">Live listings are maintained by the MLS and updated in real time on these platforms. Click any to search homes currently for sale in our neighborhood.</p>
+      </div>
+
+      <!-- Featured Listings (CMS-managed) -->
+      <div id="pinned-listings-section" style="display:none; margin-bottom:var(--space-10);">
+        <h3 style="font-family:var(--font-display);font-size:var(--text-xl);font-weight:700;color:var(--color-text);margin-bottom:var(--space-6);">Board-Highlighted Listings</h3>
+        <div class="resource-grid" id="pinned-listings-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));"></div>
+        <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-3);">Listings highlighted by the HOA board. Not an endorsement. Always verify independently.</p>
+      </div>
+
+      <!-- Platform Links -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:var(--space-4);">
+
+        <a href="https://www.zillow.com/homes/shamrock-ridge-forney-tx_rb/" target="_blank" rel="noopener noreferrer" class="resource-card" style="text-decoration:none; display:flex; flex-direction:column; gap:var(--space-3);">
+          <div style="display:flex;align-items:center;gap:var(--space-3);">
+            <div style="width:44px;height:44px;border-radius:10px;background:#006aff;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:1rem;letter-spacing:-0.5px;">Z</div>
+            <div>
+              <p style="font-weight:700;font-size:var(--text-base);color:var(--color-text);">Zillow</p>
+              <p style="font-size:var(--text-xs);color:var(--color-text-muted);">Shamrock Ridge · Forney, TX</p>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);">Browse active listings, see Zestimates, price history, and recent sales in the neighborhood.</p>
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--color-primary);margin-top:auto;">View on Zillow →</span>
+        </a>
+
+        <a href="https://www.redfin.com/neighborhood/518960/TX/Forney/Shamrock-Ridge" target="_blank" rel="noopener noreferrer" class="resource-card" style="text-decoration:none; display:flex; flex-direction:column; gap:var(--space-3);">
+          <div style="display:flex;align-items:center;gap:var(--space-3);">
+            <div style="width:44px;height:44px;border-radius:10px;background:#d1301f;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:1rem;">R</div>
+            <div>
+              <p style="font-weight:700;font-size:var(--text-base);color:var(--color-text);">Redfin</p>
+              <p style="font-size:var(--text-xs);color:var(--color-text-muted);">Shamrock Ridge · Forney, TX</p>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);">Detailed listing data, school info, commute times, and neighborhood market trends.</p>
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--color-primary);margin-top:auto;">View on Redfin →</span>
+        </a>
+
+        <a href="https://www.realtor.com/realestateandhomes-search/Shamrock-Ridge_Talty_TX" target="_blank" rel="noopener noreferrer" class="resource-card" style="text-decoration:none; display:flex; flex-direction:column; gap:var(--space-3);">
+          <div style="display:flex;align-items:center;gap:var(--space-3);">
+            <div style="width:44px;height:44px;border-radius:10px;background:#d9232d;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:0.9rem;">RM</div>
+            <div>
+              <p style="font-weight:700;font-size:var(--text-base);color:var(--color-text);">Realtor.com</p>
+              <p style="font-size:var(--text-xs);color:var(--color-text-muted);">Shamrock Ridge · Talty, TX</p>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);">MLS-sourced listings updated daily. Filter by beds, baths, price, and more.</p>
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--color-primary);margin-top:auto;">View on Realtor.com →</span>
+        </a>
+
+        <a href="https://www.zillow.com/homes/recently_sold/shamrock-ridge-forney-tx_rb/" target="_blank" rel="noopener noreferrer" class="resource-card" style="text-decoration:none; display:flex; flex-direction:column; gap:var(--space-3);">
+          <div style="display:flex;align-items:center;gap:var(--space-3);">
+            <div style="width:44px;height:44px;border-radius:10px;background:color-mix(in oklab,var(--color-primary) 15%,transparent);color:var(--color-primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div>
+              <p style="font-weight:700;font-size:var(--text-base);color:var(--color-text);">Recently Sold</p>
+              <p style="font-size:var(--text-xs);color:var(--color-text-muted);">Shamrock Ridge · Zillow</p>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);">See what homes in Shamrock Ridge have actually sold for in the last 90 days.</p>
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--color-primary);margin-top:auto;">View recent sales →</span>
+        </a>
+
+      </div>
+
+      <!-- Pin a listing CTA for board members -->
+      <div class="callout" style="margin-top:var(--space-8);background:color-mix(in oklab,var(--color-primary) 6%,transparent);border-color:color-mix(in oklab,var(--color-primary) 25%,transparent);">
+        <svg class="callout-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div class="callout-body">
+          <p class="callout-title">Selling your home in Shamrock Ridge?</p>
+          <p class="callout-text">HOA board members can pin featured listings to this page via the <a href="./admin/" style="color:var(--color-primary);font-weight:600;">admin panel</a>. Add your listing URL, price, photo, and a short description — it will appear highlighted at the top of this section for all 600 households to see.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Homeowner Tips ── -->
+  <section class="section section-alt" aria-labelledby="tips-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">For Sellers &amp; Buyers</span>
+        <h2 class="section-title" id="tips-heading">Navigating the Current Market</h2>
+        <p class="section-desc">What the data means for Shamrock Ridge homeowners right now.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--space-5);">
+
+        <div class="resource-card">
+          <div class="resource-card-header">
+            <div style="width:40px;height:40px;border-radius:10px;background:color-mix(in oklab,var(--color-primary) 12%,transparent);color:var(--color-primary);display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+            </div>
+            <h3 style="font-size:var(--text-base);font-weight:700;color:var(--color-text);">If You're Thinking of Selling</h3>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;">Homes are sitting longer — 102 days on average vs. 88 last year. Pricing right from day one matters more than ever. With a 97.8% sale-to-list ratio, well-priced homes are still selling close to asking.</p>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-header">
+            <div style="width:40px;height:40px;border-radius:10px;background:color-mix(in oklab,var(--color-accent) 12%,transparent);color:var(--color-accent);display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3 style="font-size:var(--text-base);font-weight:700;color:var(--color-text);">If You're Looking to Buy in the Neighborhood</h3>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;">More inventory and longer market times give buyers negotiating room. With values up 68% since 2015, buying into Shamrock Ridge remains one of the stronger long-term plays in Kaufman County.</p>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-header">
+            <div style="width:40px;height:40px;border-radius:10px;background:color-mix(in oklab,var(--color-success) 12%,transparent);color:var(--color-success);display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <h3 style="font-size:var(--text-base);font-weight:700;color:var(--color-text);">If You're Staying Put</h3>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;">Your home has gained an average of $126K in value since 2015. Maintaining curb appeal and keeping up with HOA standards directly supports your neighbor's sale price — and your own equity.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="./index.html" class="footer-logo" aria-label="Shamrock Ridge HOA Home">
+          <svg viewBox="0 0 40 40" fill="none" width="32" height="32" aria-hidden="true">
+            <circle cx="20" cy="20" r="20" fill="var(--color-primary)"/>
+            <ellipse cx="20" cy="14" rx="5" ry="6.5" fill="rgba(255,255,255,0.9)"/>
+            <ellipse cx="14.5" cy="20.5" rx="6.5" ry="5" fill="rgba(255,255,255,0.9)"/>
+            <ellipse cx="25.5" cy="20.5" rx="6.5" ry="5" fill="rgba(255,255,255,0.9)"/>
+            <rect x="19" y="24" width="2" height="8" rx="1" fill="rgba(255,255,255,0.9)"/>
+            <circle cx="20" cy="19.5" r="3" fill="var(--color-primary)"/>
+          </svg>
+          <span style="font-family:var(--font-display);font-size:var(--text-base);font-weight:700;color:#fff;">Shamrock Ridge HOA</span>
+        </a>
+        <p class="footer-tagline">Serving 600 households in Forney, Texas since 1998.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Navigate</p>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="./index.html">Home</a>
+          <a href="./documents.html">Documents</a>
+          <a href="./news.html">News &amp; Events</a>
+          <a href="./resources.html">Resources</a>
+          <a href="./vendors.html">Vendors</a>
+          <a href="./realestate.html">Real Estate</a>
+          <a href="./contact.html">Contact</a>
+        </nav>
+      </div>
+      <div>
+        <p class="footer-col-title">Documents</p>
+        <nav class="footer-links">
+          <a href="./documents.html#bylaws">Bylaws &amp; CC&Rs</a>
+          <a href="./documents.html#financial">Financials</a>
+          <a href="./documents.html#architectural">ARC Guidelines</a>
+          <a href="./documents.html#minutes">Meeting Minutes</a>
+        </nav>
+      </div>
+      <div>
+        <p class="footer-col-title">Quick Info</p>
+        <div class="footer-links">
+          <span>Forney, TX 75126</span>
+          <span>Kaufman County</span>
+          <a href="./contact.html">Contact the Board</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Shamrock Ridge Homeowners Association, Inc. All rights reserved.</span>
+      Created by RedWolf
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';r.setAttribute('data-theme',d);if(t){function u(){t.setAttribute('aria-label','Switch to '+(d==='dark'?'light':'dark')+' mode');t.innerHTML=d==='dark'?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';}u();t.addEventListener('click',()=>{d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);u();})}})();
+</script>
+
+<script>
+(function(){const btn=document.getElementById('menu-toggle'),nav=document.getElementById('site-nav');if(!btn||!nav)return;btn.addEventListener('click',()=>{const isOpen=nav.classList.toggle('open');btn.setAttribute('aria-expanded',isOpen);btn.setAttribute('aria-label',isOpen?'Close menu':'Open menu');btn.innerHTML=isOpen?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';});document.addEventListener('click',(e)=>{if(!nav.contains(e.target)&&!btn.contains(e.target)){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';}});})();
+</script>
+
+<!-- Home Value Chart -->
+<script>
+(function() {
+  const labels = ["2013-01","2013-04","2013-07","2013-10","2014-01","2014-04","2014-07","2014-10","2015-01","2015-04","2015-07","2015-10","2016-01","2016-04","2016-07","2016-10","2017-01","2017-04","2017-07","2017-10","2018-01","2018-04","2018-07","2018-10","2019-01","2019-04","2019-07","2019-10","2020-01","2020-04","2020-07","2020-10","2021-01","2021-04","2021-07","2021-10","2022-01","2022-04","2022-07","2022-10","2023-01","2023-04","2023-07","2023-10","2024-01","2024-04","2024-07","2024-10","2025-01","2025-04","2025-07","2025-10","2026-01"];
+  const values = [159389,163500,167800,172100,176500,179200,181800,183100,184532,187200,191500,196300,201800,208400,214200,218900,223100,228700,234500,239200,243800,247100,249900,251200,250800,251900,253400,249800,249215,252100,258700,268400,282100,301800,322500,337200,349800,362100,368900,357200,342800,337100,336200,337800,335200,328400,321800,316900,315200,316100,317800,314100,310727];
+
+  const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+
+  function getColors() {
+    return {
+      line: isDark() ? '#5fa873' : '#1a5c2e',
+      fill1: isDark() ? 'rgba(95,168,115,0.18)' : 'rgba(26,92,46,0.12)',
+      fill2: isDark() ? 'rgba(95,168,115,0)' : 'rgba(26,92,46,0)',
+      grid: isDark() ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)',
+      text: isDark() ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.45)',
+      tooltip: isDark() ? '#1e2e20' : '#ffffff',
+    };
+  }
+
+  // Filter to 2015 onwards
+  const startIdx = labels.indexOf('2015-01');
+  const chartLabels = labels.slice(startIdx);
+  const chartValues = values.slice(startIdx);
+
+  // Nicer x-axis labels: show year only at Jan
+  const displayLabels = chartLabels.map(l => l.endsWith('-01') ? l.slice(0,4) : '');
+
+  const ctx = document.getElementById('valueChart').getContext('2d');
+  const c = getColors();
+
+  const gradient = ctx.createLinearGradient(0, 0, 0, 320);
+  gradient.addColorStop(0, c.fill1);
+  gradient.addColorStop(1, c.fill2);
+
+  const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: displayLabels,
+      datasets: [{
+        label: 'Median Home Value',
+        data: chartValues,
+        borderColor: c.line,
+        borderWidth: 2.5,
+        backgroundColor: gradient,
+        fill: true,
+        tension: 0.4,
+        pointRadius: 0,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: c.line,
+        pointHoverBorderColor: '#fff',
+        pointHoverBorderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: c.tooltip,
+          titleColor: isDark() ? '#fff' : '#1a1a2e',
+          bodyColor: isDark() ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.6)',
+          borderColor: isDark() ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+          borderWidth: 1,
+          padding: 12,
+          cornerRadius: 10,
+          callbacks: {
+            title: (items) => {
+              const fullLabel = chartLabels[items[0].dataIndex];
+              const date = new Date(fullLabel + '-01');
+              return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            },
+            label: (item) => ` Median value: $${item.raw.toLocaleString()}`,
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: c.grid, drawTicks: false },
+          border: { display: false },
+          ticks: {
+            color: c.text,
+            font: { size: 11, family: "'Source Sans 3', sans-serif" },
+            maxRotation: 0,
+            autoSkip: false,
+          }
+        },
+        y: {
+          grid: { color: c.grid, drawTicks: false },
+          border: { display: false },
+          ticks: {
+            color: c.text,
+            font: { size: 11, family: "'Source Sans 3', sans-serif" },
+            callback: v => '$' + (v / 1000).toFixed(0) + 'K',
+            maxTicksLimit: 6,
+          }
+        }
+      }
+    }
+  });
+
+  // Re-render chart when theme toggles
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    setTimeout(() => {
+      const nc = getColors();
+      const newGrad = ctx.createLinearGradient(0, 0, 0, 320);
+      newGrad.addColorStop(0, nc.fill1);
+      newGrad.addColorStop(1, nc.fill2);
+      chart.data.datasets[0].borderColor = nc.line;
+      chart.data.datasets[0].pointHoverBackgroundColor = nc.line;
+      chart.data.datasets[0].backgroundColor = newGrad;
+      chart.options.scales.x.grid.color = nc.grid;
+      chart.options.scales.y.grid.color = nc.grid;
+      chart.options.scales.x.ticks.color = nc.text;
+      chart.options.scales.y.ticks.color = nc.text;
+      chart.options.plugins.tooltip.backgroundColor = nc.tooltip;
+      chart.update();
+    }, 50);
+  });
+})();
+</script>
+
+<script src="./cms-loader.js"></script>
+</body>
+</html>

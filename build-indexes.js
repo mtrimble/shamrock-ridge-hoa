@@ -10,7 +10,7 @@
 const fs   = require('fs');
 const path = require('path');
 
-const collections = ['announcements', 'events', 'board', 'documents'];
+const collections = ['announcements', 'events', 'board', 'documents', 'vendors'];
 const dataDir = path.join(__dirname, '_data');
 
 collections.forEach(col => {

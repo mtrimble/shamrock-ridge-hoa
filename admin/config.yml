@@ -112,6 +112,40 @@ collections:
           - { label: "Info Callout 3 — Title", name: "callout3_title", widget: "string", default: "New: Documents Now Online" }
           - { label: "Info Callout 3 — Text", name: "callout3_text", widget: "text" }
 
+  # ── Vendors ──────────────────────────────────────────────────────────────
+  - name: "vendors"
+    label: "Vendor Directory"
+    label_singular: "Vendor"
+    folder: "_data/vendors"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    summary: "{{name}} — {{category}}"
+    sortable_fields: ["name", "category"]
+    fields:
+      - { label: "Business Name", name: "name", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "HVAC", value: "hvac" }
+          - { label: "Plumbing", value: "plumbing" }
+          - { label: "Electrical", value: "electrical" }
+          - { label: "Pest Control", value: "pest" }
+          - { label: "Lawn & Landscaping", value: "lawn" }
+          - { label: "General Contractor", value: "contractor" }
+          - { label: "Roofing", value: "roofing" }
+          - { label: "Painting", value: "painting" }
+          - { label: "Cleaning", value: "cleaning" }
+          - { label: "Other", value: "other" }
+      - { label: "Phone", name: "phone", widget: "string", required: false }
+      - { label: "Website", name: "website", widget: "string", required: false, hint: "Full URL, e.g. https://example.com" }
+      - { label: "Address", name: "address", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false, hint: "1-2 sentence summary of the business." }
+      - { label: "Community Recommended", name: "recommended", widget: "boolean", default: false, hint: "Check if this vendor has been recommended by multiple Shamrock Ridge residents." }
+      - { label: "Active", name: "active", widget: "boolean", default: true, hint: "Uncheck to hide this vendor from the directory." }
+
   # ── Documents ────────────────────────────────────────────────────────────
   - name: "documents"
     label: "HOA Documents"

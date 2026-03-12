@@ -1,0 +1,130 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# When using Netlify, media uploads go here
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+# ── Collections ──────────────────────────────────────────────────────────────
+
+collections:
+
+  # ── Announcements / News ────────────────────────────────────────────────
+  - name: "announcements"
+    label: "Announcements & News"
+    label_singular: "Announcement"
+    folder: "_data/announcements"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} ({{date}})"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "MMMM D, YYYY", time_format: false }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Announcement", value: "announcement" }
+          - { label: "Community Event", value: "event" }
+          - { label: "Important Notice", value: "urgent" }
+          - { label: "Meeting", value: "meeting" }
+          - { label: "Financial", value: "financial" }
+      - { label: "Summary (shown on homepage & news list)", name: "excerpt", widget: "text", hint: "1-3 sentences. Displayed on the homepage news cards." }
+      - { label: "Full Body (optional)", name: "body", widget: "markdown", required: false, hint: "Full article text shown on the News page." }
+      - { label: "Show on Homepage", name: "featured", widget: "boolean", default: true, hint: "If checked, this appears in the 3-card homepage announcements section." }
+
+  # ── Events ──────────────────────────────────────────────────────────────
+  - name: "events"
+    label: "Upcoming Events"
+    label_singular: "Event"
+    folder: "_data/events"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} — {{event_date}}"
+    sortable_fields: ["event_date", "title"]
+    fields:
+      - { label: "Event Name", name: "title", widget: "string" }
+      - { label: "Event Date", name: "event_date", widget: "datetime", format: "YYYY-MM-DD", date_format: "MMMM D, YYYY", time_format: false }
+      - { label: "Event Time", name: "event_time", widget: "string", hint: "e.g. 6:30 PM", required: false }
+      - { label: "Location", name: "location", widget: "string", hint: "e.g. Forney Community Center", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+
+  # ── Board Members ────────────────────────────────────────────────────────
+  - name: "board"
+    label: "Board of Directors"
+    label_singular: "Board Member"
+    folder: "_data/board"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{name}} — {{role}}"
+    fields:
+      - { label: "Full Name", name: "name", widget: "string" }
+      - label: "Role / Title"
+        name: "role"
+        widget: "select"
+        options:
+          - "President"
+          - "Vice President"
+          - "Treasurer"
+          - "Secretary"
+          - "Director at Large"
+      - { label: "Email (optional)", name: "email", widget: "string", required: false, hint: "Leave blank to route all contact through the management company." }
+      - { label: "Term Expires", name: "term", widget: "string", required: false, hint: "e.g. December 2027" }
+      - { label: "Sort Order", name: "order", widget: "number", value_type: "int", default: 99, hint: "Lower numbers appear first (President = 1, VP = 2, etc.)" }
+
+  # ── Management Company ───────────────────────────────────────────────────
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Management Company"
+        name: "management"
+        file: "_data/management.json"
+        fields:
+          - { label: "Company Name", name: "company_name", widget: "string" }
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Mailing Address", name: "address", widget: "string" }
+          - { label: "Office Hours", name: "office_hours", widget: "string", default: "Mon–Fri, 9:00 AM – 5:00 PM" }
+          - { label: "After-Hours Emergency Phone", name: "emergency_phone", widget: "string", hint: "For water main breaks, dangerous conditions, etc." }
+          - { label: "Payment Portal URL", name: "payment_url", widget: "string", required: false, hint: "Link to the online dues payment portal, if available." }
+
+      - label: "Homepage Settings"
+        name: "homepage"
+        file: "_data/homepage.json"
+        fields:
+          - { label: "Hero Headline", name: "hero_title", widget: "string", default: "Your Shamrock Ridge Community" }
+          - { label: "Hero Subheading", name: "hero_sub", widget: "text", default: "Official home for Shamrock Ridge HOA — documents, announcements, bylaws, and resources for all 600 households in our neighborhood." }
+          - { label: "Info Callout 1 — Title", name: "callout1_title", widget: "string", default: "Management Certificate on File" }
+          - { label: "Info Callout 1 — Text", name: "callout1_text", widget: "text" }
+          - { label: "Info Callout 2 — Title", name: "callout2_title", widget: "string", default: "ARC Approval Required Before Projects" }
+          - { label: "Info Callout 2 — Text", name: "callout2_text", widget: "text" }
+          - { label: "Info Callout 3 — Title", name: "callout3_title", widget: "string", default: "New: Documents Now Online" }
+          - { label: "Info Callout 3 — Text", name: "callout3_text", widget: "text" }
+
+  # ── Documents ────────────────────────────────────────────────────────────
+  - name: "documents"
+    label: "HOA Documents"
+    label_singular: "Document"
+    folder: "_data/documents"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{category}})"
+    fields:
+      - { label: "Document Title", name: "title", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Governing Documents", value: "governing" }
+          - { label: "Architectural Review (ARC)", value: "arc" }
+          - { label: "Financial", value: "financial" }
+          - { label: "Meeting Minutes", value: "minutes" }
+          - { label: "Management", value: "management" }
+          - { label: "Forms & Applications", value: "forms" }
+      - { label: "Description", name: "description", widget: "string", required: false, hint: "Short note shown under the title." }
+      - { label: "File Upload", name: "file", widget: "file", required: false, hint: "Upload a PDF. If blank, the document link will be inactive." }
+      - { label: "External URL (alternative to upload)", name: "external_url", widget: "string", required: false, hint: "Use this if the document is hosted elsewhere." }
+      - { label: "Date / Version", name: "date", widget: "string", required: false, hint: "e.g. Amended 2023 or January 2026" }
+      - { label: "Sort Order", name: "order", widget: "number", value_type: "int", default: 99 }

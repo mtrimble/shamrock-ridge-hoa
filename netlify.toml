@@ -1,0 +1,11 @@
+# Netlify configuration for Shamrock Ridge HOA
+# This file tells Netlify how to build and serve the site.
+
+[build]
+  # Run the index-builder script before each deploy so CMS-added files appear
+  command = "node build-indexes.js"
+  publish = "."
+
+# Enable Netlify Identity for CMS login
+[context.production]
+  environment = { NODE_VERSION = "20" }

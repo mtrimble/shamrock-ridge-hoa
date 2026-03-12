@@ -1,6 +1,6 @@
 ---
-name: "[Secretary Name]"
-role: "Secretary"
+name: Kenneth Stafford
+role: Secretary
 email: ""
 term: ""
 order: 4

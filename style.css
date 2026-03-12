@@ -1318,3 +1318,145 @@
   border-color: rgba(255,255,255,0.9);
   color: var(--color-primary);
 }
+
+/* ── Weather Widget ──────────────────────────────────────────────────────────── */
+
+.weather-widget {
+  position: absolute;
+  bottom: var(--space-8);
+  right: var(--space-8);
+  width: 280px;
+  background: rgba(10, 30, 15, 0.55);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  color: #fff;
+  z-index: 4;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+.weather-current {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.weather-icon-wrap {
+  font-size: 2.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.weather-now {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.weather-temp {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.weather-desc {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: capitalize;
+  margin-top: 2px;
+}
+
+.weather-feels {
+  font-size: var(--text-xs);
+  opacity: 0.65;
+  margin-top: 1px;
+}
+
+/* 5-day forecast row */
+.weather-forecast {
+  display: flex;
+  gap: 4px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: var(--space-3);
+}
+
+.wx-day {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 2px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.wx-day:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.wx-day-name {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.65;
+}
+
+.wx-day-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.wx-day-hi {
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+.wx-day-lo {
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+.weather-credit {
+  margin-top: var(--space-3);
+  font-size: 10px;
+  opacity: 0.4;
+  text-align: right;
+}
+.weather-credit a {
+  color: inherit;
+  text-decoration: none;
+}
+.weather-credit a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* On small screens, hide widget inside hero and show a compact bar below */
+@media (max-width: 860px) {
+  .weather-widget {
+    position: static;
+    width: 100%;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background: rgba(10, 30, 15, 0.85);
+    box-shadow: none;
+    border-radius: 0 0 0 0;
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .weather-forecast {
+    gap: 2px;
+  }
+}

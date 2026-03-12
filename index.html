@@ -109,6 +109,21 @@
         </a>
       </div>
     </div>
+
+    <!-- Weather Widget -->
+    <div class="weather-widget" id="weather-widget" aria-label="Current weather in Forney, TX">
+      <div class="weather-current">
+        <div class="weather-icon-wrap" id="wx-icon">⋯</div>
+        <div class="weather-now">
+          <span class="weather-temp" id="wx-temp">--</span>
+          <span class="weather-desc" id="wx-desc">Loading…</span>
+          <span class="weather-feels" id="wx-feels"></span>
+        </div>
+      </div>
+      <div class="weather-forecast" id="wx-forecast"></div>
+      <p class="weather-credit">Weather: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a></p>
+    </div>
+
   </section>
 
   <!-- Stats Bar -->
@@ -480,6 +495,71 @@ if (signupForm) {
     }
   });
 }
+</script>
+
+<script>
+// ── Weather Widget — Open-Meteo (no API key required) ────────────────────────
+(function () {
+  // Forney, TX coordinates
+  const LAT = 32.75, LON = -96.47;
+  const API = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}` +
+    `&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m` +
+    `&daily=weather_code,temperature_2m_max,temperature_2m_min` +
+    `&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch` +
+    `&timezone=America%2FChicago&forecast_days=5`;
+
+  // WMO weather code → { label, emoji }
+  function wxInfo(code) {
+    if (code === 0)              return { label: 'Clear', icon: '☀️' };
+    if (code <= 2)               return { label: 'Partly Cloudy', icon: '⛅' };
+    if (code === 3)              return { label: 'Overcast', icon: '☁️' };
+    if (code <= 49)              return { label: 'Foggy', icon: '🌫️' };
+    if (code <= 57)              return { label: 'Drizzle', icon: '🌦️' };
+    if (code <= 67)              return { label: 'Rain', icon: '🌧️' };
+    if (code <= 77)              return { label: 'Snow', icon: '❄️' };
+    if (code <= 82)              return { label: 'Rain Showers', icon: '🌦️' };
+    if (code <= 86)              return { label: 'Snow Showers', icon: '🌨️' };
+    if (code >= 95)              return { label: 'Thunderstorms', icon: '⛈️' };
+    return { label: 'Cloudy', icon: '☁️' };
+  }
+
+  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  fetch(API)
+    .then(r => r.json())
+    .then(data => {
+      const c = data.current;
+      const d = data.daily;
+      const info = wxInfo(c.weather_code);
+
+      document.getElementById('wx-icon').textContent  = info.icon;
+      document.getElementById('wx-temp').textContent  = Math.round(c.temperature_2m) + '°';
+      document.getElementById('wx-desc').textContent  = info.label;
+      document.getElementById('wx-feels').textContent =
+        `Feels like ${Math.round(c.apparent_temperature)}° · Humidity ${c.relative_humidity_2m}%`;
+
+      // 5-day forecast
+      const forecastEl = document.getElementById('wx-forecast');
+      forecastEl.innerHTML = d.time.map((dateStr, i) => {
+        const dayName = i === 0 ? 'Today' : DAYS[new Date(dateStr + 'T12:00:00').getDay()];
+        const fx = wxInfo(d.weather_code[i]);
+        return `
+          <div class="wx-day">
+            <span class="wx-day-name">${dayName}</span>
+            <span class="wx-day-icon">${fx.icon}</span>
+            <span class="wx-day-hi">${Math.round(d.temperature_2m_max[i])}°</span>
+            <span class="wx-day-lo">${Math.round(d.temperature_2m_min[i])}°</span>
+          </div>`;
+      }).join('');
+
+      document.getElementById('weather-widget').style.opacity = '1';
+    })
+    .catch(() => {
+      // Fail silently — hide widget if API unreachable
+      const w = document.getElementById('weather-widget');
+      if (w) w.style.display = 'none';
+    });
+})();
 </script>
 </body>
 </html>

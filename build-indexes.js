@@ -18,7 +18,7 @@ collections.forEach(col => {
   if (!fs.existsSync(dir)) return;
 
   const files = fs.readdirSync(dir)
-    .filter(f => f.endsWith('.json') && f !== 'index.json')
+    .filter(f => (f.endsWith('.json') || f.endsWith('.md')) && f !== 'index.json')
     .sort();
 
   const indexPath = path.join(dir, 'index.json');

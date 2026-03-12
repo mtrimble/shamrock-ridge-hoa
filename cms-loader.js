@@ -18,11 +18,54 @@ const CMS = {
     }
   },
 
-  // Fetch all JSON files in a _data/<folder>/ directory via an index file
+  // Parse YAML frontmatter from a markdown string
+  parseFrontmatter(text) {
+    if (!text || !text.startsWith('---')) return null;
+    const end = text.indexOf('---', 3);
+    if (end === -1) return null;
+    const yaml = text.slice(3, end).trim();
+    const obj = {};
+    yaml.split('\n').forEach(line => {
+      const colon = line.indexOf(':');
+      if (colon === -1) return;
+      const key = line.slice(0, colon).trim();
+      let val = line.slice(colon + 1).trim();
+      // Strip surrounding quotes
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.slice(1, -1);
+      }
+      // Booleans and numbers
+      if (val === 'true') val = true;
+      else if (val === 'false') val = false;
+      else if (val !== '' && !isNaN(Number(val))) val = Number(val);
+      obj[key] = val;
+    });
+    // Body content after second ---
+    const body = text.slice(end + 3).trim();
+    if (body) obj.body = body;
+    return obj;
+  },
+
+  // Fetch a file — handles both .json and .md frontmatter
+  async fetchFile(path) {
+    try {
+      const res = await fetch(path);
+      if (!res.ok) return null;
+      if (path.endsWith('.md')) {
+        const text = await res.text();
+        return this.parseFrontmatter(text);
+      }
+      return await res.json();
+    } catch {
+      return null;
+    }
+  },
+
+  // Fetch all files in a _data/<folder>/ directory via an index file
   async fetchCollection(folder) {
-    const index = await this.fetchJSON(`/_data/${folder}/index.json`);
+    const index = await this.fetchJSON(`./_data/${folder}/index.json`);
     if (!index || !Array.isArray(index)) return [];
-    const items = await Promise.all(index.map(f => this.fetchJSON(`/_data/${folder}/${f}`)));
+    const items = await Promise.all(index.map(f => this.fetchFile(`./_data/${folder}/${f}`)));
     return items.filter(Boolean);
   },
 
@@ -81,7 +124,7 @@ const CMS = {
     const index = await this.fetchJSON('./_data/announcements/index.json');
     if (!index) return; // fall back to static HTML
 
-    const all = await Promise.all(index.map(f => this.fetchJSON(`./_data/announcements/${f}`)));
+    const all = await Promise.all(index.map(f => this.fetchFile(`./_data/announcements/${f}`)));
     let items = all.filter(Boolean);
 
     // Sort newest first
@@ -116,7 +159,7 @@ const CMS = {
     if (listContainer) {
       const index = await this.fetchJSON('./_data/announcements/index.json');
       if (index) {
-        const all = await Promise.all(index.map(f => this.fetchJSON(`./_data/announcements/${f}`)));
+        const all = await Promise.all(index.map(f => this.fetchFile(`./_data/announcements/${f}`)));
         let items = all.filter(Boolean).sort((a, b) => new Date(b.date) - new Date(a.date));
         if (items.length) {
           // Preserve the heading, replace only the article list below it
@@ -142,7 +185,7 @@ const CMS = {
     if (eventsContainer) {
       const index = await this.fetchJSON('./_data/events/index.json');
       if (index) {
-        const all = await Promise.all(index.map(f => this.fetchJSON(`./_data/events/${f}`)));
+        const all = await Promise.all(index.map(f => this.fetchFile(`./_data/events/${f}`)));
         let events = all.filter(Boolean)
           .filter(e => new Date(e.event_date + 'T12:00:00') >= new Date())
           .sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
@@ -180,7 +223,7 @@ const CMS = {
     if (boardGrid) {
       const index = await this.fetchJSON('./_data/board/index.json');
       if (index) {
-        const all = await Promise.all(index.map(f => this.fetchJSON(`./_data/board/${f}`)));
+        const all = await Promise.all(index.map(f => this.fetchFile(`./_data/board/${f}`)));
         let members = all.filter(Boolean).sort((a, b) => (a.order || 99) - (b.order || 99));
         const colors = [
           'var(--color-primary)',

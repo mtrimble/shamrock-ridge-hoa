@@ -1227,3 +1227,94 @@
 @media (max-width: 700px) {
   .two-col { grid-template-columns: 1fr; }
 }
+
+/* ── Email Signup ─────────────────────────────────────────────────────────── */
+.email-signup-box {
+  background: linear-gradient(135deg, var(--color-primary) 0%, color-mix(in oklab, var(--color-primary) 80%, #000) 100%);
+  border-radius: var(--radius-2xl);
+  padding: clamp(var(--space-8), 5vw, var(--space-16));
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.email-signup-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  color: #fff;
+  margin-bottom: var(--space-5);
+}
+
+.email-signup-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--space-3);
+}
+
+.email-signup-desc {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.8);
+  max-width: 52ch;
+  margin: 0 auto var(--space-8);
+  line-height: 1.6;
+}
+
+.email-signup-form {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.email-signup-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .email-signup-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.email-signup-field .form-label {
+  color: rgba(255,255,255,0.9);
+  text-align: left;
+  display: block;
+}
+
+.email-signup-field .form-input {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+.email-signup-field .form-input::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+
+.email-signup-field .form-input:focus {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.6);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
+}
+
+.email-signup-btn {
+  background: #fff;
+  color: var(--color-primary);
+  border-color: #fff;
+  padding: var(--space-3) var(--space-8);
+  font-weight: 700;
+}
+
+.email-signup-btn:hover {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.9);
+  color: var(--color-primary);
+}

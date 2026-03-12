@@ -275,6 +275,45 @@
     </div>
   </section>
 
+  <!-- Email Signup -->
+  <section class="section" aria-labelledby="signup-heading">
+    <div class="container container--narrow">
+      <div class="email-signup-box">
+        <div class="email-signup-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h2 class="email-signup-title" id="signup-heading">Stay in the Loop</h2>
+        <p class="email-signup-desc">Get community announcements, meeting reminders, and important notices delivered straight to your inbox. No spam — just neighborhood news.</p>
+        <form class="email-signup-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="newsletter">
+          <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <div class="email-signup-row">
+            <div class="email-signup-field">
+              <label class="form-label" for="signup-name">Your Name</label>
+              <input class="form-input" type="text" id="signup-name" name="name" placeholder="Jane Smith" required autocomplete="name">
+            </div>
+            <div class="email-signup-field">
+              <label class="form-label" for="signup-email">Email Address</label>
+              <input class="form-input" type="email" id="signup-email" name="email" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            <div class="email-signup-field">
+              <label class="form-label" for="signup-address">Street Address <span style="font-weight:400;color:var(--color-text-faint)">(optional)</span></label>
+              <input class="form-input" type="text" id="signup-address" name="address" placeholder="123 Shamrock Ridge Dr">
+            </div>
+          </div>
+          <div id="signup-success" style="display:none;padding:var(--space-3) var(--space-4);background:var(--color-success-highlight);border-radius:var(--radius-md);font-size:var(--text-sm);color:var(--color-success);margin-bottom:var(--space-4);text-align:center">
+            You're signed up! You'll receive community updates at the email you provided.
+          </div>
+          <button type="submit" class="btn btn-primary email-signup-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Subscribe to Updates
+          </button>
+          <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-3);text-align:center">For Shamrock Ridge residents only. Unsubscribe at any time.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- Important Info Callouts -->
   <section class="section" aria-labelledby="info-heading">
     <div class="container container--narrow">
@@ -422,5 +461,23 @@
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="./cms-loader.js"></script>
+<script>
+// Email signup form — show success message on submit
+const signupForm = document.querySelector('form[name="newsletter"]');
+if (signupForm) {
+  signupForm.addEventListener('submit', function(e) {
+    // Let Netlify handle the actual POST, but show success UI
+    const successEl = document.getElementById('signup-success');
+    const btn = signupForm.querySelector('button[type="submit"]');
+    if (successEl) {
+      setTimeout(() => {
+        successEl.style.display = 'block';
+        signupForm.reset();
+        if (btn) btn.style.display = 'none';
+      }, 500);
+    }
+  });
+}
+</script>
 </body>
 </html>

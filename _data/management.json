@@ -1,9 +1,9 @@
 {
-  "company_name": "[Property Management Company Name]",
-  "phone": "[Phone Number]",
-  "email": "[Email Address]",
-  "address": "[Mailing Address]",
+  "company_name": "FirstService Residential",
+  "phone": "214-871-9700 ",
+  "email": "Melissa.Chestnut@fsresidential.com",
+  "address": "14951 N. Dallas Pkwy., Ste 600",
   "office_hours": "Mon–Fri, 9:00 AM – 5:00 PM",
-  "emergency_phone": "[Emergency Phone]",
-  "payment_url": ""
+  "emergency_phone": "214-871-9700 ",
+  "payment_url": "https://portal.connectresident.com/"
 }

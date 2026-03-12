@@ -1,6 +1,6 @@
 ---
-name: "[Vice President]"
-role: "Vice President"
+name: "Sarah Rossini "
+role: Vice President
 email: ""
 term: ""
 order: 2

@@ -215,6 +215,118 @@ const CMS = {
     }
   },
 
+  // ── Vendors Page ─────────────────────────────────────────────────────────
+
+  async loadVendorsPage() {
+    const grid = document.getElementById('vendors-grid');
+    if (!grid) return;
+
+    const vendors = await this.fetchCollection('vendors');
+    if (!vendors.length) return; // keep static fallback HTML
+
+    // Filter to active only, sort alphabetically
+    const active = vendors
+      .filter(v => v.active !== false)
+      .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+
+    if (!active.length) return;
+
+    const catLabel = {
+      hvac:       'HVAC',
+      plumbing:   'Plumbing',
+      electrical: 'Electrical',
+      pest:       'Pest Control',
+      lawn:       'Lawn & Landscape',
+      roofing:    'Roofing',
+      contractor: 'General Contractor',
+      painting:   'Painting',
+      cleaning:   'Cleaning',
+      pool:       'Pool',
+      other:      'Other',
+    };
+
+    // SVG icons per category
+    const catIcon = {
+      hvac:       '<path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/>',
+      plumbing:   '<path d="M12 2a5 5 0 0 1 5 5v3H7V7a5 5 0 0 1 5-5z"/><rect x="7" y="10" width="10" height="12" rx="1"/><line x1="12" y1="10" x2="12" y2="22"/>',
+      electrical: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+      pest:       '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+      lawn:       '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+      roofing:    '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+      contractor: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>',
+      pool:       '<path d="M2 12h20M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 7c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/>',
+      painting:   '<path d="M19 11H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z"/><path d="M14 11V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/>',
+      other:      '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
+    };
+
+    const catColor = {
+      hvac:       'var(--color-primary)',
+      plumbing:   'var(--color-blue, #4a90a4)',
+      electrical: 'var(--color-warning)',
+      pest:       'var(--color-success)',
+      lawn:       'var(--color-success)',
+      roofing:    'var(--color-error)',
+      contractor: 'var(--color-error)',
+      pool:       'var(--color-blue, #4a90a4)',
+      painting:   'var(--color-accent)',
+      cleaning:   'var(--color-primary)',
+      other:      'var(--color-text-muted)',
+    };
+
+    const phoneSVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.62 4.9 2 2 0 0 1 3.6 2.74h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.5a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 18z"/></svg>`;
+    const webSVG  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`;
+
+    // Preserve the no-results element
+    const noResults = grid.querySelector('#no-results');
+
+    grid.innerHTML = active.map(v => {
+      const cat   = (v.category || 'other').toLowerCase();
+      const color = catColor[cat] || 'var(--color-primary)';
+      const icon  = catIcon[cat]  || catIcon.other;
+      const label = catLabel[cat] || v.category || 'Other';
+      const nameSearch = (v.name + ' ' + label + ' ' + (v.description || '') + ' forney').toLowerCase();
+
+      // Format phone for display: digits only → (XXX) XXX-XXXX
+      let phoneDisplay = v.phone || '';
+      let phoneDigits  = (v.phone || '').replace(/\D/g, '');
+      if (phoneDigits.length === 10) {
+        phoneDisplay = `(${phoneDigits.slice(0,3)}) ${phoneDigits.slice(3,6)}-${phoneDigits.slice(6)}`;
+      }
+
+      return `
+        <div class="vendor-card" data-category="${this.escHtml(cat)}" data-name="${this.escHtml(nameSearch)}">
+          <div class="vendor-card-top">
+            <div class="vendor-icon" style="background:color-mix(in oklab,${color} 12%,transparent);color:${color}">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">${icon}</svg>
+            </div>
+            ${v.recommended ? '<span class="vendor-badge">Community Recommended</span>' : ''}
+          </div>
+          <p class="vendor-category-label">${this.escHtml(label)}</p>
+          <p class="vendor-name">${this.escHtml(v.name || '')}</p>
+          ${v.description ? `<p class="vendor-desc">${this.escHtml(v.description)}</p>` : ''}
+          <div class="vendor-actions">
+            ${phoneDigits ? `<a href="tel:${phoneDigits}" class="vendor-btn vendor-btn-phone">${phoneSVG} ${this.escHtml(phoneDisplay)}</a>` : ''}
+            ${v.website ? `<a href="${this.escHtml(v.website)}" target="_blank" rel="noopener noreferrer" class="vendor-btn vendor-btn-web">${webSVG} Website</a>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Re-add no-results div
+    if (noResults) grid.appendChild(noResults);
+
+    // Re-init filter/search since new cards were injected
+    if (typeof initVendorControls === 'function') initVendorControls();
+  },
+
+  escHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  },
+
   // ── Contact / Board Page ──────────────────────────────────────────────────
 
   async loadContactPage() {
@@ -286,5 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
     CMS.loadNewsPage();
   } else if (path.includes('contact')) {
     CMS.loadContactPage();
+  } else if (path.includes('vendors')) {
+    CMS.loadVendorsPage();
   }
 });

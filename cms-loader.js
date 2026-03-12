@@ -260,10 +260,11 @@ const CMS = {
       'var(--color-error)',
     ];
 
-    // Build slug → { label, icon path, color } map
+    // Build slug → { label, icon path, color } map (always lowercase slugs)
     const catMap = {};
     categories.forEach((c, i) => {
-      catMap[c.slug] = {
+      const slug = (c.slug || '').toLowerCase();
+      catMap[slug] = {
         label: c.label || c.slug,
         icon:  iconPaths[c.icon] || iconPaths.other,
         color: colorPalette[i % colorPalette.length],
@@ -278,8 +279,8 @@ const CMS = {
         vendors.filter(v => v.active !== false).map(v => (v.category || 'other').toLowerCase())
       );
       const tabsHTML = categories
-        .filter(c => activeVendorCats.has(c.slug))
-        .map(c => `<button class="filter-tab" data-filter="${this.escHtml(c.slug)}">${this.escHtml(c.label)}</button>`)
+        .filter(c => activeVendorCats.has((c.slug || '').toLowerCase()))
+        .map(c => `<button class="filter-tab" data-filter="${this.escHtml((c.slug||'').toLowerCase())}">${this.escHtml(c.label)}</button>`)
         .join('');
       // Insert after the "All" button
       tabsEl.querySelector('[data-filter="all"]').insertAdjacentHTML('afterend', tabsHTML);

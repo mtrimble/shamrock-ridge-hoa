@@ -5,6 +5,7 @@
   # Run the index-builder script before each deploy so CMS-added files appear
   command = "node build-indexes.js"
   publish = "."
+  functions = "netlify/functions"
 
 # Enable Netlify Identity for CMS login
 [context.production]

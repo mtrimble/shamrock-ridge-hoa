@@ -5,8 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shamrock Ridge HOA — Admin</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    #vendor-approval-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 99999;
+      background: #1a5c2e;
+      color: #fff;
+      text-align: center;
+      padding: 8px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    #vendor-approval-bar a {
+      color: #fff;
+      font-weight: 700;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+    #vendor-approval-bar a:hover { opacity: 0.85; }
+  </style>
 </head>
 <body>
+  <div id="vendor-approval-bar">
+    🏡 Shamrock Ridge HOA Admin
+    <a href="/admin/vendors.html">→ Vendor Approvals</a>
+  </div>
   <!-- Decap CMS loads the full editor UI here -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Approvals — Shamrock Ridge HOA Admin</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6f8;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #1a5c2e;
+      color: #fff;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .header-left { display: flex; align-items: center; gap: 1rem; }
+    .header h1 { font-size: 1.1rem; font-weight: 600; }
+    .header-back {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.15s;
+    }
+    .header-back:hover { color: #fff; }
+    .user-info { font-size: 0.85rem; opacity: 0.75; }
+
+    /* ── Main layout ── */
+    .main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a5c2e;
+      margin-bottom: 0.35rem;
+    }
+    .page-subtitle {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Auth gate ── */
+    #auth-gate {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    #auth-gate h2 { font-size: 1.3rem; margin-bottom: 0.75rem; color: #1a5c2e; }
+    #auth-gate p { color: #666; margin-bottom: 1.5rem; }
+    .btn-login {
+      background: #1a5c2e;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-login:hover { background: #145224; }
+
+    /* ── Loading / empty states ── */
+    .state-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #888;
+    }
+    .state-card svg { margin-bottom: 1rem; opacity: 0.4; }
+    .state-card p { font-size: 1rem; }
+
+    /* ── Submission cards ── */
+    .submissions-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .sub-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      border: 1px solid #e8eaf0;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .sub-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+
+    .sub-card-header {
+      background: #f8faf9;
+      border-bottom: 1px solid #e8eaf0;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .sub-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .sub-meta {
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    .sub-card-body {
+      padding: 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 1.5rem;
+    }
+    @media (max-width: 600px) {
+      .sub-card-body { grid-template-columns: 1fr; }
+    }
+
+    .field-row { display: flex; flex-direction: column; gap: 0.2rem; }
+    .field-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #aaa;
+    }
+    .field-value {
+      font-size: 0.95rem;
+      color: #333;
+      word-break: break-word;
+    }
+    .field-value a { color: #1a5c2e; text-decoration: none; }
+    .field-value a:hover { text-decoration: underline; }
+    .field-row.full-width { grid-column: 1 / -1; }
+
+    .sub-card-footer {
+      border-top: 1px solid #e8eaf0;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: #fafafa;
+    }
+    .sub-submitted-by {
+      font-size: 0.82rem;
+      color: #999;
+    }
+
+    .action-buttons { display: flex; gap: 0.75rem; }
+
+    .btn-approve, .btn-reject {
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-approve {
+      background: #1a5c2e;
+      color: #fff;
+    }
+    .btn-approve:hover { background: #145224; transform: translateY(-1px); }
+    .btn-approve:disabled { background: #a0c4a8; cursor: not-allowed; transform: none; }
+
+    .btn-reject {
+      background: #fff;
+      color: #c0392b;
+      border: 1.5px solid #e8bbb8;
+    }
+    .btn-reject:hover { background: #fdf3f2; border-color: #c0392b; }
+    .btn-reject:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── Toasts ── */
+    #toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 1000;
+    }
+    .toast {
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      animation: slideIn 0.25s ease;
+      max-width: 320px;
+    }
+    .toast.success { background: #1a5c2e; }
+    .toast.error   { background: #c0392b; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Count badge ── */
+    .count-badge {
+      background: #b07e1a;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border-radius: 99px;
+    }
+
+    .refresh-btn {
+      background: none;
+      border: 1.5px solid #ccc;
+      color: #555;
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s;
+    }
+    .refresh-btn:hover { border-color: #1a5c2e; color: #1a5c2e; }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.35rem;
+    }
+    .title-inner { display: flex; align-items: center; gap: 0.75rem; }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-left">
+    <a href="/admin/" class="header-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      CMS Home
+    </a>
+    <h1>Vendor Approvals</h1>
+  </div>
+  <span class="user-info" id="user-email"></span>
+</header>
+
+<!-- Main -->
+<main class="main">
+  <!-- Auth gate (shown until logged in) -->
+  <div id="auth-gate">
+    <h2>Admin Login Required</h2>
+    <p>You must be logged in as an HOA admin to review vendor submissions.</p>
+    <button class="btn-login" id="login-btn">Log in with Netlify Identity</button>
+  </div>
+
+  <!-- Content (hidden until logged in) -->
+  <div id="content" style="display:none">
+    <div class="title-row">
+      <div class="title-inner">
+        <h2 class="page-title">Pending Submissions</h2>
+        <span class="count-badge" id="count-badge" style="display:none"></span>
+      </div>
+      <button class="refresh-btn" id="refresh-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        Refresh
+      </button>
+    </div>
+    <p class="page-subtitle">Review and approve (or reject) vendor suggestions submitted by Shamrock Ridge residents. Approving a vendor adds it to the live directory automatically.</p>
+
+    <div id="submissions-container">
+      <div class="state-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p>Loading submissions…</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="toast-container"></div>
+
+<script>
+// ── Netlify Identity ──────────────────────────────────────────────────────────
+const netlifyIdentity = window.netlifyIdentity;
+let currentUser = null;
+let netlifyToken = null;
+
+netlifyIdentity.on('init', user => {
+  if (user) onLoggedIn(user);
+});
+netlifyIdentity.on('login', user => {
+  netlifyIdentity.close();
+  onLoggedIn(user);
+});
+netlifyIdentity.on('logout', () => {
+  currentUser = null;
+  netlifyToken = null;
+  document.getElementById('auth-gate').style.display = 'block';
+  document.getElementById('content').style.display = 'none';
+});
+
+document.getElementById('login-btn').addEventListener('click', () => {
+  netlifyIdentity.open('login');
+});
+
+async function onLoggedIn(user) {
+  currentUser = user;
+  document.getElementById('auth-gate').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+  document.getElementById('user-email').textContent = user.email || '';
+
+  // Get JWT for Netlify API calls
+  try {
+    netlifyToken = await user.jwt();
+  } catch(e) {
+    console.warn('Could not get JWT', e);
+  }
+
+  loadSubmissions();
+}
+
+// ── Load Submissions from Netlify Forms ──────────────────────────────────────
+// We proxy through our Netlify Function to avoid exposing the API token.
+// The function reads NETLIFY_API_TOKEN from env vars server-side.
+
+async function loadSubmissions() {
+  const container = document.getElementById('submissions-container');
+  container.innerHTML = `
+    <div class="state-card">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p>Loading submissions…</p>
+    </div>`;
+
+  try {
+    const res = await fetch('/.netlify/functions/vendor-submissions', {
+      headers: { Authorization: `Bearer ${netlifyToken}` }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+    const submissions = await res.json();
+    renderSubmissions(submissions);
+  } catch(err) {
+    container.innerHTML = `
+      <div class="state-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p>Error loading submissions: ${err.message}</p>
+      </div>`;
+    console.error(err);
+  }
+}
+
+function renderSubmissions(submissions) {
+  const container = document.getElementById('submissions-container');
+  const badge = document.getElementById('count-badge');
+
+  if (!submissions.length) {
+    badge.style.display = 'none';
+    container.innerHTML = `
+      <div class="state-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p>No pending vendor submissions. You're all caught up!</p>
+      </div>`;
+    return;
+  }
+
+  badge.textContent = submissions.length;
+  badge.style.display = 'inline-block';
+
+  const list = document.createElement('div');
+  list.className = 'submissions-list';
+
+  submissions.forEach(sub => {
+    const data = sub.data || {};
+    const submitted = new Date(sub.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+    const card = document.createElement('div');
+    card.className = 'sub-card';
+    card.dataset.id = sub.id;
+
+    card.innerHTML = `
+      <div class="sub-card-header">
+        <span class="sub-name">${esc(data['business-name'] || data.name || '(No name)')}</span>
+        <span class="sub-meta">Submitted ${submitted}</span>
+      </div>
+      <div class="sub-card-body">
+        <div class="field-row">
+          <span class="field-label">Category</span>
+          <span class="field-value">${esc(data.category || '—')}</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Phone</span>
+          <span class="field-value">${data.phone ? `<a href="tel:${esc(data.phone)}">${esc(data.phone)}</a>` : '—'}</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Website</span>
+          <span class="field-value">${data.website ? `<a href="${esc(data.website)}" target="_blank" rel="noopener">${esc(data.website)}</a>` : '—'}</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Submitted By</span>
+          <span class="field-value">${esc(data['your-name'] || data['submitter-name'] || data['name-address'] || data.submitter || '—')}</span>
+        </div>
+        <div class="field-row full-width">
+          <span class="field-label">Why Recommended</span>
+          <span class="field-value">${esc(data['why-recommend'] || data.recommendation || data.description || data.body || '—')}</span>
+        </div>
+      </div>
+      <div class="sub-card-footer">
+        <span class="sub-submitted-by">ID: ${sub.id.slice(0,8)}…</span>
+        <div class="action-buttons">
+          <button class="btn-reject" data-id="${sub.id}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Reject
+          </button>
+          <button class="btn-approve" data-id="${sub.id}" data-vendor='${JSON.stringify({
+            name: data['business-name'] || data.name || '',
+            category: data.category || 'other',
+            phone: data.phone || '',
+            website: data.website || '',
+            description: data['why-recommend'] || data.recommendation || data.description || '',
+          }).replace(/'/g, "&#39;")}'>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Approve & Publish
+          </button>
+        </div>
+      </div>`;
+
+    list.appendChild(card);
+  });
+
+  container.innerHTML = '';
+  container.appendChild(list);
+
+  // Wire buttons
+  container.querySelectorAll('.btn-approve').forEach(btn => {
+    btn.addEventListener('click', () => handleAction('approve', btn));
+  });
+  container.querySelectorAll('.btn-reject').forEach(btn => {
+    btn.addEventListener('click', () => handleAction('reject', btn));
+  });
+}
+
+// ── Approve / Reject ──────────────────────────────────────────────────────────
+async function handleAction(action, btn) {
+  const card = btn.closest('.sub-card');
+  const submissionId = card.dataset.id;
+  const vendor = action === 'approve' ? JSON.parse(btn.dataset.vendor) : null;
+
+  // Disable both buttons while working
+  card.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.textContent = action === 'approve' ? 'Publishing…' : 'Rejecting…';
+
+  try {
+    const res = await fetch('/.netlify/functions/vendor-approve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${netlifyToken}` },
+      body: JSON.stringify({ action, submissionId, vendor }),
+    });
+
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.error || `HTTP ${res.status}`);
+
+    // Animate card out
+    card.style.transition = 'opacity 0.3s, transform 0.3s';
+    card.style.opacity = '0';
+    card.style.transform = 'translateX(20px)';
+    setTimeout(() => {
+      card.remove();
+      // Update badge
+      const remaining = document.querySelectorAll('.sub-card').length;
+      const badge = document.getElementById('count-badge');
+      if (remaining === 0) {
+        badge.style.display = 'none';
+        document.getElementById('submissions-container').innerHTML = `
+          <div class="state-card">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <p>No pending vendor submissions. You're all caught up!</p>
+          </div>`;
+      } else {
+        badge.textContent = remaining;
+      }
+    }, 300);
+
+    showToast(
+      action === 'approve'
+        ? `✓ ${vendor.name} approved and published to the live directory.`
+        : '✓ Submission rejected and removed.',
+      'success'
+    );
+  } catch(err) {
+    // Re-enable buttons on error
+    card.querySelectorAll('button').forEach(b => b.disabled = false);
+    card.querySelector('.btn-approve').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Approve & Publish`;
+    card.querySelector('.btn-reject').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Reject`;
+    showToast(`Error: ${err.message}`, 'error');
+    console.error(err);
+  }
+}
+
+// ── Refresh button ────────────────────────────────────────────────────────────
+document.getElementById('refresh-btn').addEventListener('click', loadSubmissions);
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(message, type = 'success') {
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.textContent = message;
+  document.getElementById('toast-container').appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+
+// ── Escape HTML ───────────────────────────────────────────────────────────────
+function esc(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+netlifyIdentity.init();
+</script>
+</body>
+</html>

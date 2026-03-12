@@ -1,6 +1,9 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: master
+
+site_url: https://shamrockridgehoa.netlify.app
+local_backend: false
 
 # When using Netlify, media uploads go here
 media_folder: "assets/uploads"

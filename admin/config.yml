@@ -203,7 +203,7 @@ collections:
         description: "Add, remove, or reorder vendor categories. Each category you add here will automatically appear as a filter bubble on the Vendor Directory page."
         fields:
           - label: "Categories"
-            name: "root"
+            name: "categories"
             widget: "list"
             summary: "{{fields.label}} ({{fields.slug}})"
             fields:

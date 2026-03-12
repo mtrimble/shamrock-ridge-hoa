@@ -230,7 +230,10 @@ const CMS = {
     if (!vendors.length) return; // keep static fallback HTML
 
     // Build category lookup maps from the JSON file
-    const categories = Array.isArray(rawCats) ? rawCats : [];
+    // Data is wrapped as { categories: [...] } so Decap CMS can edit it
+    const categories = Array.isArray(rawCats) ? rawCats
+      : (rawCats && Array.isArray(rawCats.categories)) ? rawCats.categories
+      : [];
 
     // icon paths keyed by icon name (built-in library — no external deps)
     const iconPaths = {

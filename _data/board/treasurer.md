@@ -1,6 +1,6 @@
 ---
-name: "[Treasurer Name]"
-role: "Treasurer"
+name: Liliana Soto
+role: Treasurer
 email: ""
 term: ""
 order: 3
